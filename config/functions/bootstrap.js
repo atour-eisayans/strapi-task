@@ -1,13 +1,20 @@
-'use strict';
-
-/**
- * An asynchronous bootstrap function that runs before
- * your application gets started.
- *
- * This gives you an opportunity to set up your data model,
- * run jobs, or perform some special logic.
- *
- * See more details here: https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#bootstrap
- */
-
-module.exports = () => {};
+module.exports = async () => {
+  const promises = [];
+  const authenticated = await strapi
+    .query("role", "users-permissions")
+    .findOne({ type: "authenticated" });
+  authenticated.permissions.forEach((permission) => {
+    if (
+      permission.type === "application" &&
+      permission.controller === "meeting" &&
+      permission.action !== "count"
+    ) {
+      promises.push(
+        strapi
+          .query("permission", "users-permissions")
+          .update({ id: permission.id }, { ...permission, enabled: true })
+      );
+    }
+  });
+  await Promise.all(promises);
+};
