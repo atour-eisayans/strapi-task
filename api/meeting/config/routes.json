@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/meetings",
+      "handler": "meeting.find",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meetings/count",
+      "handler": "meeting.count",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meetings/:id",
+      "handler": "meeting.findOne",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/meetings",
+      "handler": "meeting.create",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/meetings/:id",
+      "handler": "meeting.update",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/meetings/:id",
+      "handler": "meeting.delete",
+      "config": {
+        "policies": ["global::is-authenticated"]
+      }
+    }
+  ]
+}
