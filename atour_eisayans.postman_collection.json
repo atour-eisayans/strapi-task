@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "91a9d182-5c4a-482d-8156-9c6d03c75f0c",
+		"name": "atour_eisayans",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17867760"
+	},
+	"item": [
+		{
+			"name": "strapiTask",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"",
+											"if (jsonData && jsonData.jwt) {",
+											"    postman.setEnvironmentVariable(\"accessToken\", jsonData.jwt);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"identifier\": \"user#1\",\n    \"password\": \"{{test_password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/local",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"local"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"",
+											"if (jsonData && jsonData.jwt) {",
+											"    postman.setEnvironmentVariable(\"accessToken\", jsonData.jwt);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user#2\",\n    \"email\": \"easayansatur@gmail.com\",\n    \"password\": \"{{test_password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/local/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"local",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Me",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/me",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Meeting",
+					"item": [
+						{
+							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"",
+											"if (jsonData && jsonData.id) {",
+											"    postman.setEnvironmentVariable(\"meeting_id\", jsonData.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"meetingDate\": \"2023-03-12T07:40:00.000Z\",\n    \"meetingDuration\": 90\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/meetings",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"meetings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindOne",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/meetings/{{meeting_id}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"meetings",
+										"{{meeting_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/meetings/{{meeting_id}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"meetings",
+										"{{meeting_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/meetings/2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"meetings",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/meetings",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"meetings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
