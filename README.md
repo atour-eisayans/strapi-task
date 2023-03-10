@@ -1,6 +1,7 @@
 # Strapi application
 
-This program has been tested with node:14.21.3
+# PREREQUISITES
+node:14.21.3 This is recommended version for strapi v3
 
 After pulling the codes, create a .env file in root directory and add the following key to that file:
 `SENDGRID_API_KEY=...`

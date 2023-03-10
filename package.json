@@ -10,7 +10,6 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
     "knex": "0.21.18",
     "sqlite3": "5.0.0",
     "strapi": "3.6.11",
@@ -26,7 +25,7 @@
     "strapi-utils": "3.6.11"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Atour Eisayans"
   },
   "strapi": {
     "uuid": "cab3b871-925c-4209-851b-fa98e1e7b62f"
