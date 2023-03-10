@@ -1,19 +1,35 @@
 module.exports = async () => {
-  const authenticated = await strapi
+  // set meeting default permissions for authenticated role
+  const permissions = {
+    application: {
+      controllers: {
+        meeting: {
+          count: {
+            enabled: false,
+          },
+          findOne: {
+            enabled: true,
+          },
+          find: {
+            enabled: true,
+          },
+          create: {
+            enabled: true,
+          },
+          delete: {
+            enabled: true,
+          },
+          update: {
+            enabled: true,
+          },
+        },
+      },
+    },
+  };
+  const authenticatedRole = await strapi
     .query("role", "users-permissions")
     .findOne({ type: "authenticated" });
-  const promises = authenticated.permissions
-    .filter(
-      (permission) =>
-        permission.type === "application" &&
-        permission.controller === "meeting" &&
-        permission.action !== "count"
-    )
-    .map((permission) =>
-      strapi
-        .query("permission", "users-permissions")
-        .update({ id: permission.id }, { ...permission, enabled: true })
-    );
-
-  await Promise.all(promises);
+  await strapi.plugins[
+    "users-permissions"
+  ].services.userspermissions.updateRole(authenticatedRole.id, { permissions });
 };
